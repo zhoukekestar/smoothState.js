@@ -57,6 +57,7 @@
                 duration: 0,
                 render: function (url, $container) {
                     $body.scrollTop(0);
+                    $container.data('smoothState').options.start(url, $container);
                 }
             },
 
@@ -66,6 +67,7 @@
                 render: function (url, $container) {
                     $body.css("cursor", "wait");
                     $body.find("a").css("cursor", "wait");
+                    $container.data('smoothState').options.progress(url, $container);
                 }
             },
 
@@ -75,12 +77,30 @@
                 render: function (url, $container, $content) {
                     $body.css("cursor", "auto");
                     $body.find("a").css("cursor", "auto");
+                    $container.data('smoothstate').options.loaded(url, $container, $content);
                     $container.html($content);
+                    $container.data('smoothState').options.end(url, $container, $content);
                 }
             },
 
             /** Run when content has been injected and all animations are complete  */
             callback : function(url, $container, $content) {
+
+            },
+
+            start: function(url, $container) {
+
+            },
+
+            progress: function(url, $container) {
+
+            },
+
+            loaded: function(url, $container, $content) {
+
+            },
+
+            end: function(url, $container, $content) {
 
             }
         },
@@ -549,6 +569,7 @@
                 cache: cache,
                 load: load,
                 fetch: fetch,
+                options: options,
                 toggleAnimationClass: toggleAnimationClass
             };
         },
